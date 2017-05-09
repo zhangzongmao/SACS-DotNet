@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -55,6 +56,7 @@ namespace SACS.Library.Rest
         /// <returns>The HTTP response with authorization result model.</returns>
         public async Task<HttpResponse<AuthTokenRS>> AuthorizeAsync(string credentials)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(this.config.Environment);
